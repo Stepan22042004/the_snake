@@ -21,7 +21,7 @@ RIGHT = (1, 0)
 BOARD_BACKGROUND_COLOR = (0, 0, 0)
 
 # Скорость движения змейки
-SPEED = 20
+SPEED = 10
 
 # Настройка игрового окна
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
@@ -55,8 +55,8 @@ class Apple(GameObject):
 
     def randomize_position(self):
         """Устанавливает случайное положение яблока на игровом поле"""
-        self.position = (randint(0, GRID_WIDTH) * GRID_SIZE,
-                         randint(0, GRID_HEIGHT) * GRID_SIZE)
+        self.position = (randint(0, GRID_WIDTH - 1) * GRID_SIZE,
+                         randint(0, GRID_HEIGHT - 1) * GRID_SIZE)
 
     def __init__(self):
         super().__init__()
@@ -187,6 +187,7 @@ def main():
         snake.move(screen)
         if snake.positions[0] == apple.position:
             apple.randomize_position()
+            print(apple.position)
             snake.length += 1
         apple.draw(screen)
         snake.draw(screen)
