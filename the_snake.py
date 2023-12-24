@@ -187,7 +187,6 @@ def main():
         snake.move(screen)
         if snake.positions[0] == apple.position:
             apple.randomize_position()
-            print(apple.position)
             snake.length += 1
         apple.draw(screen)
         snake.draw(screen)
