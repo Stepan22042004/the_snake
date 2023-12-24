@@ -59,9 +59,9 @@ class Apple(GameObject):
                          randint(0, GRID_HEIGHT) * GRID_SIZE)
 
     def __init__(self):
+        super().__init__()
         self.body_color = (255, 0, 0)
         self.randomize_position()
-        super().__init__()
 
     def draw(self, surface):
         """Отрисовывает яблоко на игровой поверхности"""
