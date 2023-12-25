@@ -2,9 +2,6 @@ from random import choice, randint
 
 import pygame
 
-# Инициализация PyGame
-pygame.init()
-
 # Константы для размеров
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE = 20
@@ -20,17 +17,11 @@ RIGHT = (1, 0)
 # Цвета фона - черный
 BOARD_BACKGROUND_COLOR = (0, 0, 0)
 
+# Цвет рамки
+FRAME_COLOR = (93, 216, 228)
+
 # Скорость движения змейки
 SPEED = 10
-
-# Настройка игрового окна
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
-
-# Заголовок окна игрового поля
-pygame.display.set_caption('Змейка')
-
-# Настройка времени
-clock = pygame.time.Clock()
 
 
 # Тут опишите все классы игры
@@ -68,7 +59,7 @@ class Apple(GameObject):
         rect = pygame.Rect((self.position[0], self.position[1]),
                            (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(surface, self.body_color, rect)
-        pygame.draw.rect(surface, (93, 216, 228), rect, 1)
+        pygame.draw.rect(surface, FRAME_COLOR, rect, 1)
 
 
 class Snake(GameObject):
@@ -141,12 +132,12 @@ class Snake(GameObject):
                 pygame.Rect((position[0], position[1]), (GRID_SIZE, GRID_SIZE))
             )
             pygame.draw.rect(surface, self.body_color, rect)
-            pygame.draw.rect(surface, (93, 216, 228), rect, 1)
+            pygame.draw.rect(surface, FRAME_COLOR, rect, 1)
 
         head = self.positions[0]
         head_rect = pygame.Rect((head[0], head[1]), (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(surface, self.body_color, head_rect)
-        pygame.draw.rect(surface, (93, 216, 228), head_rect, 1)
+        pygame.draw.rect(surface, FRAME_COLOR, head_rect, 1)
 
         if self.last:
             last_rect = pygame.Rect(
@@ -176,10 +167,16 @@ def handle_keys(game_object):
 
 def main():
     """Main"""
+    # Инициализация PyGame
+    pygame.init()
+    # Настройка игрового окна
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
+    # Заголовок окна игрового поля
+    pygame.display.set_caption('Змейка')
+    # Настройка времени
+    clock = pygame.time.Clock()
     snake = Snake()
     apple = Apple()
-    ...
-
     while True:
         clock.tick(SPEED)
         handle_keys(snake)
