@@ -36,8 +36,7 @@ pygame.display.set_caption('Змейка')
 clock = pygame.time.Clock()
 
 
-# Тут опишите все классы игры
-class GameObject():
+class GameObject:
     """Базовый класс, от которого наследуются другие игровые объекты."""
 
     def __init__(self):
@@ -66,7 +65,7 @@ class Apple(GameObject):
         self.body_color = (255, 0, 0)
         self.randomize_position()
 
-    def draw(self, surface):
+    def draw(self, surface: object):
         """Отрисовывает яблоко на игровой поверхности"""
         rect = pygame.Rect((self.position[0], self.position[1]),
                            (GRID_SIZE, GRID_SIZE))
@@ -88,7 +87,7 @@ class Snake(GameObject):
         self.body_color = (0, 255, 0)
         self.last = None
 
-    def reset(self, screen):
+    def reset(self, screen: object):
         """Сбрасывает змейку в начальное состояние
         после столкновения с собой.
         """
@@ -109,7 +108,7 @@ class Snake(GameObject):
         """Возвращает позицию головы змейки"""
         return self.positions[0]
 
-    def move(self, screen):
+    def move(self, screen: object):
         """Обновляет позицию змейки (координаты каждой секции),
         добавляя новую голову в начало списка positions и
         удаляя последний элемент,
@@ -137,7 +136,7 @@ class Snake(GameObject):
             if len(self.positions) > self.length:
                 self.positions.pop()
 
-    def draw(self, surface):
+    def draw(self, surface: object):
         """Отрисовывает змейку на экране, затирая след"""
         for position in self.positions[:-1]:
             rect = (
@@ -159,7 +158,7 @@ class Snake(GameObject):
             pygame.draw.rect(surface, BOARD_BACKGROUND_COLOR, last_rect)
 
 
-def handle_keys(game_object):
+def handle_keys(game_object: object):
     """Обрабатывает нажатия клавиш,
     чтобы изменить направление движения змейки
     """
